@@ -3,7 +3,22 @@
 @section('title', 'Home Page')
 
 @section('content')
-	<!-- begin breadcrumb -->
+
+<link  href="{{ asset('/assets/css/main/bootstrap-reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/base.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/br.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/color.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/effect.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/font.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/index.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/main.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/margin.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/padding.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/round.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/bootstrap.min.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/double-navbar.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/filters.css') }}" rel="stylesheet">	<!-- begin breadcrumb -->
 	<ol class="breadcrumb float-xl-right">
 		<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
 		<li class="breadcrumb-item"><a href="javascript:;">Library</a></li>
@@ -236,24 +251,26 @@
     <div class="clear-both10"></div>
 </div>
 	<!-- end panel -->
+    @endsection
 
     @section('stylesheet')
-<link rel="stylesheet" href="{{ asset('assets/css/main/bootstrap-reset.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/base.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/br.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/color.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/effect.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/font.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/index.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/main.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/margin.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/padding.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/reset.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/round.css') }}">
-<link rel="stylesheet" href="{{ asset('assets/css/main/bootstrap.min.css') }}">
-@endsection
+<link  href="{{ asset('/assets/css/main/bootstrap-reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/base.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/br.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/color.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/effect.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/font.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/index.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/main.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/margin.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/padding.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/round.css') }}" rel="stylesheet">
+<link  href="{{ asset('/assets/css/main/bootstrap.min.css') }}" rel="stylesheet">
 
 @endsection
+
+
 
 @section('script')
 <script src="{{ asset('assets/css/main/coin.js') }}"></script>
