@@ -1,0 +1,70 @@
+::-webkit-scrollbar {
+    width: 4px;
+}
+#left,
+#main {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: fixed;
+    top:0;
+}
+#left {
+    width: 15%;
+    height: 100vh;
+    left: 0;
+    z-index: 2;
+    background: #1D976C;  
+    background: -webkit-linear-gradient(to bottom, #316de8, #00aeff); 
+    background: linear-gradient(to bottom, #316de8, #00aeff); 
+}
+#main {
+    width: 85%;
+    left: 15%;
+    z-index: 1;
+}
+#left-close {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 15%;
+    z-index: 2;
+    padding: 0 0 0 2px;
+}
+#left-close-icon {
+    display: block;
+    width: 18px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+}
+#left .link {
+    display: table;
+    width: 100%;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+#left .link:hover {
+    font-weight: 600;
+}
+#left .link .link-img {
+    display: inline-table;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    float: left;
+    margin: 2px;
+}
+#left .link .link-text {
+    display: inline-table;
+    float: left;
+    padding: 6px 6px 6px 0;
+}
+#main-container {
+    display: block;
+    width: 94%;
+    margin: 30px auto;
+    box-sizing: border-box;
+}

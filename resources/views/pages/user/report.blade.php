@@ -236,4 +236,29 @@
     <div class="clear-both10"></div>
 </div>
 	<!-- end panel -->
+
+    @section('stylesheet')
+<link rel="stylesheet" href="{{ asset('assets/css/main/bootstrap-reset.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/base.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/br.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/color.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/effect.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/font.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/index.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/main.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/margin.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/padding.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/reset.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/round.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/main/bootstrap.min.css') }}">
+@endsection
+
+@endsection
+
+@section('script')
+<script src="{{ asset('assets/css/main/coin.js') }}"></script>
+<script src="{{ asset('assets/css/main/functions.js') }}"></script>
+<script src="{{ asset('assets/css/main/index.js') }}"></script>
+<script src="{{ asset('assets/css/main/validation.js') }}"></script>  
+
 @endsection
