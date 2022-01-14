@@ -57,7 +57,7 @@
         </div>
         <div class="col-md-4 pad-0 username-div">
             <div class="dropdown right username">
-                <button class="username-dropdown dropdown-toggle" type="button" data-toggle="dropdown">Isabela Frazão<span class="caret"></span></button>
+                <button class="username-dropdown dropdown-toggle" type="button" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></button>
                 <ul class="dropdown-menu user-options">
                     <li><a href="#">Perfil</a></li>
                     <li><a href="#">Configurações</a></li>
@@ -72,7 +72,7 @@
 <div class="col-md-12">
     <div class="welcome-div">
         <div class="col-xs-8 col-md-3 pad-0">
-            <div class="welcome-text">Olá, Isabela!</div>
+            <div class="welcome-text">Olá, {{ Auth::user()->name }}!</div>
         </div>
         <div class="col-md-5 pad-0 mobile-hide">
             <span class="home-filter">15 dias</span>
