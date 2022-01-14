@@ -315,11 +315,33 @@
                                 label: 'Quantidade de parcelas no cartão de crédito',
                                 data: [12, 19, 3, 5, 2, 3, 5, 9, 4, 1, 2, 21],
                                 backgroundColor: [
-                                    '#4fbfc9'
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
 
                                 ],
                                 borderColor: [
-                                    '#4fbfc9'
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
+                                    '#4fbfc9',
 
                                 ],
                                 borderWidth: 1
