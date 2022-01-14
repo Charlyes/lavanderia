@@ -1,0 +1,48 @@
+.effect-bg {
+    /*background-color:#1e88e5;*/
+    position: relative;
+    animation-name: effectBG;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+/*@keyframes effectBG {
+    0%   {background-color:#1e88e5;}
+    50%  {background-color:#1976d2;}
+}*/
+
+.effect-pad-left {
+    animation-name: effectpad;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes effectpad {
+    0%  {
+        padding-left: 0px;
+    }
+    50% {
+        padding-left: 3px;
+    }
+    100% {
+        padding-left: 0px;
+    }
+}
+
+.effect-pad-left-10 {
+    animation-name: effectpad10;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes effectpad10 {
+    0%  {
+        padding-left: 10px;
+    }
+    50% {
+        padding-left: 13px;
+    }
+    100% {
+        padding-left: 10px;
+    }
+}

@@ -32,9 +32,9 @@
 					</a>
 				</div>
 				<div class="menu-item">
-					<a href="javascript:;" class="menu-link">
+					<a href="{{ route('report') }}" class="menu-link">
 						<div class="menu-icon"><i class="fa fa-pencil-alt"></i></div>
-						<div class="menu-text"> Send Feedback</div>
+						<div class="menu-text"> Relatório</div>
 					</a>
 				</div>
 				<div class="menu-item pb-5px">

@@ -1,0 +1,102 @@
+#navbar-call{
+    background: #3498db;
+    position: fixed;
+    padding: 4px 9px 4px 9px;
+    border-bottom-right-radius: 5px;
+    top: 0;
+    left: 0;
+    font-size: 1.9em;
+    color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+#navbar-call:hover{
+    font-size: 2.1em;
+}
+#logo-swl{
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background: #1D976C;  
+    background: -webkit-linear-gradient(to bottom, #316de8, #00aeff); 
+    background: linear-gradient(to bottom, #316de8, #00aeff); 
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 5px;
+}
+.sidenav a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    text-align: left;
+    /*margin-left: 25px;*/
+}
+.sidenav a:hover {
+    /*color: #f1f1f1;*/
+    background: #00aeff;
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+.closebtn:hover {
+    transition: font-size 0.5s;
+    font-size: 22px;
+}
+#mobile-navbar{
+
+}
+#logo-mobile{
+    /*width: 80%;*/
+    height: 35px;
+    /*margin: 0 auto;*/
+}
+@media (max-width: 991px){
+    #navbar-call{
+        display: none;
+    }
+    #mobile-navbar{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 10px;
+        z-index: 999;
+    }
+    #full-nav{
+        color: #3498db; 
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        font-size: 33px;
+    }
+    .sidenav a{
+        text-align: center !important;
+        margin-left: 0;
+    }
+    #main-container{
+        padding-top: 30px;
+    }
+}
+@media (min-width: 991px){
+    #mobile-navbar{
+        display: none;
+    }
+}

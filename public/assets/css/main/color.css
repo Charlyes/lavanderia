@@ -1,0 +1,319 @@
+body {
+    background-color: #eee;
+    color: grey;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px #1e88e5;
+}
+::-webkit-scrollbar-thumb {
+    background: #06c;
+}
+
+.effect-bg {
+    background-color:#1e88e5;
+}
+
+@keyframes effectBG {
+    0%   {background-color:#1e88e5;}
+    50%  {background-color:#1976d2;}
+}
+
+.white {
+    color: #fff;
+}
+.white-hover:hover {
+    color: #fff;
+}
+
+.grey {
+    color: grey;
+}
+.grey-hover:hover {
+    color: grey;
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.bg-blue {
+    background-color: #1e88e5;
+}
+.bg-blue-hover:hover {
+    background-color: #1976d2;
+}
+/*.bg-green {
+    background-color: green;
+}
+.bg-green-hover:hover {
+    background-color: green;
+}
+.bg-yellow {
+    background-color: yellow;
+}
+.bg-yellow-hover:hover {
+    background-color: yellow;
+}
+.bg-orange {
+    background-color: orange;
+}
+.bg-orange-hover:hover {
+    background-color: orange;
+}
+.bg-red {
+    background-color: #da3333;
+}
+.bg-red-hover:hover {
+    background-color: #c22;
+}
+.bg-purple {
+    background-color: #712580;
+}
+.bg-purple-hover:hover {
+    background-color: #617;
+}*/
+
+.border-blue {
+    border-color: #1e88e5;
+}
+
+
+
+
+
+/*Cores de textos*/
+
+.dark {
+    color: #222;
+}
+.aquamarine {
+    color: #6bcae2;
+}
+.aqua,
+.light-aqua,
+.turquoise {
+    color: #1abc9c;
+}
+.dark-aqua,
+.green-sea {
+    color: #16a085;
+}
+.green,
+.light-green,
+.emerald {
+    color: #2ecc71;
+}
+.dark-green,
+.nephritis {
+    color: #27ae60;
+}
+.light-blue,
+.peter-river {
+    color: #3898db;
+}
+.dark-blue,
+.belize-hole {
+    color: #2980b9;
+}
+.light-purple,
+.amethyst {
+    color: #9b59b6;
+}
+.purple,
+.dark-purple,
+.wisteria {
+    color: #8e44ad;
+}
+.light-asphalt,
+.asphalt {
+    color: #34495e;
+}
+.dark-asphalt,
+.green-sea2 {
+    color: #2c3e50;
+}
+.light-yellow,
+.sun-flower {
+    color: #f1c40f;
+}
+.yellow,
+.dark-yellow,
+.orange {
+    color: #f39c12;
+}
+.light-orange,
+.carrot {
+    color: #e67322;
+}
+.dark-orange,
+.pumpkin {
+    color: #d35400;
+}
+.light-red,
+.red,
+.alizarin {
+    color: #e74c3c;
+}
+.dark-red,
+.pomegranate {
+    color: #c0392b;
+}
+.light-silver,
+.clouds {
+    color: #ecf0f1;
+}
+.dark-silver,
+.silver {
+    color: #bdc3c7;
+}
+.grey,
+.light-grey,
+.concrete {
+    color: #95a5a6;
+}
+.dark-grey,
+.asbestos {
+    color: #7f8c8d;
+}
+
+
+.eletric-red {
+    color: #e70000;
+}
+.orange {
+    color: #ff8c00;
+}
+.canary-yellow {
+    color: #ffef00;
+}
+.la-salle-green {
+    color: #00811f;
+}
+.blue {
+    color: #0044ff;
+}
+.patriarch {
+    color: #760089;
+}
+
+
+
+
+
+
+
+/*Cores de fundo*/
+
+.bg-dark {
+    background-color: #222;
+}
+.bg-aquamarine {
+    background-color: #6bcae2;
+}
+.bg-aqua,
+.bg-light-aqua,
+.bg-turquoise {
+    background-color: #1abc9c;
+}
+.bg-dark-aqua,
+.bg-green-sea {
+    background-color: #16a085;
+}
+.bg-green,
+.bg-light-green,
+.bg-emerald {
+    background-color: #2ecc71;
+}
+.bg-dark-green,
+.bg-nephritis {
+    background-color: #27ae60;
+}
+.bg-light-blue,
+.bg-peter-river {
+    background-color: #3898db;
+}
+.bg-dark-blue,
+.bg-belize-hole {
+    background-color: #2980b9;
+}
+.bg-light-purple,
+.bg-amethyst {
+    background-color: #9b59b6;
+}
+.bg-purple,
+.bg-dark-purple,
+.bg-wisteria {
+    background-color: #8e44ad;
+}
+.bg-light-asphalt,
+.bg-asphalt {
+    background-color: #34495e;
+}
+.bg-dark-asphalt,
+.bg-green-sea2 {
+    background-color: #2c3e50;
+}
+.bg-light-yellow,
+.bg-sun-flower {
+    background-color: #f1c40f;
+}
+.bg-yellow,
+.bg-dark-yellow,
+.bg-orange {
+    background-color: #f39c12;
+}
+.bg-light-orange,
+.bg-carrot {
+    background-color: #e67322;
+}
+.bg-dark-orange,
+.bg-pumpkin {
+    background-color: #d35400;
+}
+.bg-light-red,
+.bg-red,
+.bg-alizarin {
+    background-color: #e74c3c;
+}
+.bg-dark-red,
+.bg-pomegranate {
+    background-color: #c0392b;
+}
+.bg-light-silver,
+.bg-clouds {
+    background-color: #ecf0f1;
+}
+.bg-dark-silver,
+.bg-silver {
+    background-color: #bdc3c7;
+}
+.bg-grey,
+.bg-light-grey,
+.bg-concrete {
+    background-color: #95a5a6;
+}
+.bg-dark-grey,
+.bg-asbestos {
+    background-color: #7f8c8d;
+}
+
+
+.bg-eletric-red {
+    background-color: #e70000;
+}
+.bg-orange {
+    background-color: #ff8c00;
+}
+.bg-canary-yellow {
+    background-color: #ffef00;
+}
+.bg-la-salle-green {
+    background-color: #00811f;
+}
+.bg-blue {
+    background-color: #0044ff;
+}
+.bg-patriarch {
+    background-color: #760089;
+}
