@@ -56,10 +56,6 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
     //  Homepage Route - Redirect based on user role is in controller.
     Route::get('/home', ['as' => 'public.home',   'uses' => 'App\Http\Controllers\UserController@index']);
 
-    Route::get('/report', function () {
-        return view('pages.user.report');
-    })->name('report');
-
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
         'as'   => '{username}',
@@ -130,7 +126,6 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
             'destroy' => 'themes.destroy',
         ],
     ]);
-    
 
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'App\Http\Controllers\AdminDetailsController@listRoutes');
