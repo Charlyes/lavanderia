@@ -222,12 +222,12 @@
                 <span class="card-title">Bandeira mais utilizadas</span><br>
                 <div class="clear-both10"></div>
                 <div class="card-icon">
-                    <img src="img/mastercard-logo.png">
+                    <img src="assets/img/mastercard-logo.png">
                     <span class="text-chart-cards">Mastercard</span>
                     <span class="cards-percent">80%</span>
                 </div>
                 <div class="card-icon">
-                    <img src="img/visa.png">
+                    <img src="assets/img/visa.png">
                     <span class="text-chart-cards">Visa</span>
                     <span class="cards-percent">20%</span>
                 </div>
