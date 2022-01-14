@@ -4,22 +4,37 @@
 
 @section('content')
 
-<link  href="{{ asset('/assets/css/main/bootstrap-reset.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/base.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/br.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/color.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/effect.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/font.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/index.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/main.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/margin.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/padding.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/reset.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/round.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/bootstrap.min.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/double-navbar.css') }}" rel="stylesheet">
-<link  href="{{ asset('/assets/css/main/filters.css') }}" rel="stylesheet">	<!-- begin breadcrumb -->
-	<ol class="breadcrumb float-xl-right">
+<link  href="{{ asset('assets/css/main/bootstrap-reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/base.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/br.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/color.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/effect.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/font.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/index.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/main.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/margin.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/padding.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/reset.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/round.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/bootstrap.min.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/double-navbar.css') }}" rel="stylesheet">
+<link  href="{{ asset('assets/css/main/filters.css') }}" rel="stylesheet">	<!-- begin breadcrumb -->
+<link  href="{{ asset('assets/css/main/main-view.css') }}" rel="stylesheet">
+
+<script src="{{ asset('assets/css/main/coin.js') }}"></script>
+<script src="{{ asset('assets/css/main/functions.js') }}"></script>
+<script src="{{ asset('assets/css/main/index.js') }}"></script>
+<script src="{{ asset('assets/css/main/validation.js') }}"></script>
+
+<script src="{{ asset('assets/chart.js/Chart.js') }}"></script>
+<script src="{{ asset('assets/chart.js/Chart.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/chart.js/Chart.bundle.js') }}"></script>
+<script src="{{ asset('assets/chart.js/Chart.min.js') }}"></script>
+<!-- <script src="{{ asset('assets/css/main/functions.js') }}"></script>
+<script src="{{ asset('assets/css/main/index.js') }}"></script>
+<script src="{{ asset('assets/css/main/validation.js') }}"></script> -->
+	
+<ol class="breadcrumb float-xl-right">
 		<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
 		<li class="breadcrumb-item"><a href="javascript:;">Library</a></li>
 		<li class="breadcrumb-item active"><a href="javascript:;">Data</a></li>
@@ -108,10 +123,98 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
-            <div class="card-infos-dash2">
+        <div class="card-infos-dash2">
                 <span class="card-title">Índices de conversão</span><br>
-                
-            </div>
+                <style>
+    #circle1,
+    #circle2{
+        position: absolute;
+    }
+    #circle1{
+        left: 10%;
+    }
+    #circle2{
+        left: 60%;
+    }
+    .progress-text{
+        width: 70px;
+        height: 70px;
+        font-weight: 700;
+        color: #3498db;
+        position: absolute;
+        left: 0px;
+        text-align: center;
+        padding-top: 25px;
+    }
+    .chart-text,
+    .chart-text-2{
+        width: 70px;
+        height: 70px;
+        font-weight: 700;
+        color: #6a6a6a;
+        position: absolute;
+        bottom: -45px;
+        text-align: center;
+        padding-top: 25px;
+    }
+    .chart-text{
+        left: 0px;
+    }
+    .chart-text-2{
+        left: -8px;
+    }
+</style>
+<div class="clear-both10"></div>
+<div id="circle1"><canvas width="70" height="70"></canvas>
+    <span id="progress-value-1" class="progress-text">40%</span>
+    <span class="chart-text">Real</span>
+</div>
+
+<div id="circle2"><canvas width="70" height="70"></canvas>
+    <cavans id="progress-value-2" class="progress-text">60%</canvas>
+    <span class="chart-text-2">S/retentivas</span>
+</div>
+
+<script>
+    var progress = document.getElementById("progress-value-1").innerText.replace(/\D/g, "");
+
+    $('#circle1').circleProgress({
+        value: "0." + progress,
+        size: 70,
+        startAngle: (-Math.PI / 2),
+        thickness: '7',
+        fill: {
+            color: ["#53c2cc"]
+        }
+    });
+    
+    
+   //CHART 1 
+   var data = {
+        datasets: [
+            {
+                data: [59, 41],
+                backgroundColor: [
+                    "#3498db",
+                    
+                ]
+
+            }]
+    };
+
+    var promisedDeliveryChart = new Chart(document.getElementById('progress-value-2'), {
+        type: 'doughnut',
+        data: data,
+        options: {
+            cutout: 55,
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: false
+            }
+        }
+    });
+</script>            </div>
         </div>
         <div class="clear-both20 mobile-show desktop-hide"></div>
         <div class="col-sm-12 col-md-4">
@@ -145,10 +248,43 @@
     </div>
     <div class="clear-both20 mobile-show desktop-hide"></div>
     <div class="col-md-3">
-        <div class="div-graphic-status smooth-shadow">
+        <div class="div-graphic-status smooth-shadow" style="height: 298px; width: 100%;">
             <div class="clear-both10"></div>
             <p class="card-title text-center">Transações por status</p>
             <!--BARRAS CIRCULARES DE PORCENTAGEM DUPLA-->
+            <div class="relative">
+            <canvas id="double-chart" width="150" height="150" style="display: block !important; box-sizing: border-box; height: 150px; width: 150px;"></canvas>
+            </div>
+            <script>
+//                CONFIGURAÇÃO DE CHART BARS
+               
+//CHART 1 
+    var data = {
+        datasets: [
+            {
+                data: [59, 41],
+                backgroundColor: [
+                    "#3498db",
+                    "#e59617"
+                ]
+
+            }]
+    };
+
+    var promisedDeliveryChart = new Chart(document.getElementById('double-chart'), {
+        type: 'doughnut',
+        data: data,
+        options: {
+            cutout: 55,
+            maintainAspectRatio: false,
+            responsive: true,
+            legend: {
+                display: false
+            }
+        }
+    });
+
+            </script>
             
             <div class="double-chart-paid">
                 <span class="chart-dot-1"></span><span class="text-chart-info">Paga</span><div class="chart-value">9</div>
@@ -279,3 +415,4 @@
 <script src="{{ asset('assets/css/main/validation.js') }}"></script>  
 
 @endsection
+
