@@ -3,6 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('Report',[App\Http\Controllers\Api\ReportController::class, 'report']);
+
+Route::get('cliente',[App\Http\Controllers\Api\ClienteController::class, 'all']);
+
+
+Route::post('cliente',[App\Http\Controllers\Api\ClienteController::class, 'posts']);
 /*
 |--------------------------------------------------------------------------
 | API Routes
