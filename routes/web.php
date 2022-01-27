@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
         return view('pages.user.report');
     })->name('report');
 
+    Route::get('cliente', 'https://www.asaas.com/api/v3/customers')->name('cliente');
+
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
         'as'   => '{username}',
