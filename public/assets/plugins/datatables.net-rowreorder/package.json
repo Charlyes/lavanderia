@@ -21,7 +21,7 @@
   "_resolved": "https://registry.npmjs.org/datatables.net-rowreorder/-/datatables.net-rowreorder-1.2.8.tgz",
   "_shasum": "2509fe798a64a52d84c43e335eccff326c3389bc",
   "_spec": "datatables.net-rowreorder@1.2.8",
-  "_where": "C:\\xampp\\htdocs\\laravel-auth\\node_modules\\datatables.net-rowreorder-bs4",
+  "_where": "C:\\xampp\\htdocs\\lavanderia\\node_modules\\datatables.net-rowreorder-bs4",
   "author": {
     "name": "SpryMedia Ltd",
     "url": "http://datatables.net"

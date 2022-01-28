@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
         return view('pages.user.report');
     })->name('report');
 
+    Route::get('/testeLogin', 'App\Http\Controllers\ReportController@testeLogin')->name('testeLogin');
+
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
         'as'   => '{username}',
