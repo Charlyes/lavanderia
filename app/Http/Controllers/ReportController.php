@@ -76,7 +76,11 @@ class ReportController extends Controller
     public function testeLogin(){
 
         // $response = Http::get('http://ik.actecn.com/public/api/logistica');
+        // $response =Http::accept('application/json')->withToken('faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58')->get('https://www.asaas.com/api/v3/customers');
+        // $response = $response->getBody()->getContents();
         
+        
+
         //Resultado
       
 
@@ -88,7 +92,7 @@ class ReportController extends Controller
         // dd($response);
         
         $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
-        $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/v3']);
+        $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/v3/customers']);
         // $headers = [
         //     'Authorization' => 'Bearer ' . $token,        
         //     'Accept'        => 'application/json',
@@ -98,8 +102,8 @@ class ReportController extends Controller
         // ]);
         // $json = file_get_contents('php://temp');
         // $arr = json_decode($json);
-        $response = $client->request('GET', '/payments?api_token='.$token);
-            $response =  $response->getBody();
+        $response = $client->request('GET', '/customers?api_token='.$token);
+            // $response =  $response->getBody();
             // $response = json_decode($response);
             //  $novo = json_decode($response);
         // $json = file_get_contents('php://temp'); 
@@ -110,9 +114,12 @@ class ReportController extends Controller
         //     ]
         // ]);
 
-        var_dump($response);
+        // var_dump($response->getBody()->getContents());
         // dd($json);
-        // dd($response->getBody()->getContents());
+
+            
+        // dd($response->getStatusCode());
+        dd($response->getResponse());
         }
 
     /**
