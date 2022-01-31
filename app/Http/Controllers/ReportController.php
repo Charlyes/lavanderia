@@ -75,14 +75,44 @@ class ReportController extends Controller
 
     public function testeLogin(){
 
-        $response = Http::get('http://ik.actecn.com/public/api/logistica');
+        // $response = Http::get('http://ik.actecn.com/public/api/logistica');
         
         //Resultado
-        $response = $response->getBody();
-        
+      
+
+        // $response = $response->getBody()->getContents();
+        // $novo = json_decode($responsive);
+        // $json = file_get_contents('php://temp'); 
+        // $arr = json_decode($json);
         //Previsao da resposta
-        dd($response);
+        // dd($response);
         
+        $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
+        $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/v3']);
+        // $headers = [
+        //     'Authorization' => 'Bearer ' . $token,        
+        //     'Accept'        => 'application/json',
+        // ];
+        // $response = $client->request('GET', 'customers?', [
+        //     'headers' => $headers
+        // ]);
+        // $json = file_get_contents('php://temp');
+        // $arr = json_decode($json);
+        $response = $client->request('GET', '/payments?api_token='.$token);
+            $response =  $response->getBody();
+            // $response = json_decode($response);
+            //  $novo = json_decode($response);
+        // $json = file_get_contents('php://temp'); 
+        // $response = $this->json('GET', 'https://www.asaas.com/api/v3/customers', [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer '. $token,
+        //         'Accept' => 'application/json'
+        //     ]
+        // ]);
+
+        var_dump($response);
+        // dd($json);
+        // dd($response->getBody()->getContents());
         }
 
     /**
