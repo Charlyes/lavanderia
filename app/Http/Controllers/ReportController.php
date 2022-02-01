@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use Auth;
 use GuzzleHttp;
+// use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
+use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Pool;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 
 
 class ReportController extends Controller
@@ -75,51 +82,21 @@ class ReportController extends Controller
 
     public function testeLogin(){
 
-        // $response = Http::get('http://ik.actecn.com/public/api/logistica');
-        // $response =Http::accept('application/json')->withToken('faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58')->get('https://www.asaas.com/api/v3/customers');
-        // $response = $response->getBody()->getContents();
-        
-        
-
-        //Resultado
-      
-
-        // $response = $response->getBody()->getContents();
-        // $novo = json_decode($responsive);
-        // $json = file_get_contents('php://temp'); 
-        // $arr = json_decode($json);
-        //Previsao da resposta
-        // dd($response);
         
         $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
-        $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/v3/customers']);
-        // $headers = [
-        //     'Authorization' => 'Bearer ' . $token,        
-        //     'Accept'        => 'application/json',
-        // ];
-        // $response = $client->request('GET', 'customers?', [
-        //     'headers' => $headers
-        // ]);
-        // $json = file_get_contents('php://temp');
-        // $arr = json_decode($json);
-        $response = $client->request('GET', '/customers?api_token='.$token);
-            // $response =  $response->getBody();
-            // $response = json_decode($response);
-            //  $novo = json_decode($response);
-        // $json = file_get_contents('php://temp'); 
-        // $response = $this->json('GET', 'https://www.asaas.com/api/v3/customers', [
-        //     'headers' => [
-        //         'Authorization' => 'Bearer '. $token,
-        //         'Accept' => 'application/json'
-        //     ]
-        // ]);
-
-        // var_dump($response->getBody()->getContents());
-        // dd($json);
+        $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/v3/customers?name=Marcelo']);
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,        
+            'accept'        => 'application/json',
+        ];
+        $response = $client->request('GET', '/customers?', [
+            'headers' => $headers
+        ]);
+        ;
+        var_dump($response->getBody()->getContents());
 
             
-        // dd($response->getStatusCode());
-        dd($response->getResponse());
+        
         }
 
     /**
