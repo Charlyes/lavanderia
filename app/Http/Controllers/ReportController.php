@@ -14,6 +14,11 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Promise;
+use GuzzleHttp\RequestOptions;
+
+
+
 
 
 class ReportController extends Controller
@@ -81,24 +86,46 @@ class ReportController extends Controller
     }
 
     public function testeLogin(){
-   
-        // $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
-        // $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com']);
-        // $headers = [
-        //     'Authorization' => 'Bearer ' . $token,        
-        //     'accept'        => 'application/json',
-        // ];
-        // $email= "alexandre@sistemaswl.com.br";
+//    try{4
+    //     $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
+    //     $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/'], ['verify' => false, 'debug' => true]);
+    //     $headers = [
+    //         'Authorization' => 'Bearer '.$token,        
+    //         'accept'        => 'application/json',
+    //         'Content-Type' => 'application/json',
+    //     ];
+        
+    //     $response = $client->request('GET', 'v3/payments?',['debug' => true],  [
+    //         'debug' => fopen('php://stderr', 'w'),
+    //     ],
+    //         [
+    //         'headers' => $headers,
+    //     ]);
+    // } catch ( \GuzzleHttp\Exception\ClientException $exception ) {
+    //     echo $exception->getResponse();
+    // }
+        // dd($response);
+
         // $response = $client->request('GET', '/api/v3/customers?', [
-        //     'headers' => $headers,
-        //     'email' => $email
-        // ]);
+        //     'headers'=> [
+        //         'Authorization' => 'key='.$token,
+        //         'Content-Type' => 'application/json'
+        // ]]);
+        // dd($response->getHeader('content-type')[0]);
+        // dd($res->getStatusCode());
+        // $promise = $client->sendAsync($response);
+        // $response = $client->send($response, ['timeout' => 60]);
+        // $code = $response->getReasonPhrase();
+        // dd($response); 
         // $response = $client->get();
         // $response = $client->request('GET', '/api/v3/customers?api_token='.$token);
-        $response = Http::withToken('1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62')->get("https://www.asaas.com/api/v3/customers?");
+        $response = Http::withHeaders([
+            'accept' => 'application/json'
+        ])->withToken('1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62')->get('https://www.asaas.com/api/v3/customers?')->status();
         
-        // var_dump($response->getBody()->getContents());
-        dd($response->getStatusCode());
+        // $response->addHeader('Authorization', "1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62");
+        dd($response['servers']);
+        
  
         }
 

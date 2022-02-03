@@ -15,7 +15,7 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "google/recaptcha": "^1.2",
-        "guzzlehttp/guzzle": "^7.4",
+        "guzzlehttp/guzzle": "^7.0",
         "intervention/image": "^2.5",
         "jaybizzle/laravel-crawler-detect": "^1.2",
         "jeremykenedy/laravel-blocker": "^3.1",
