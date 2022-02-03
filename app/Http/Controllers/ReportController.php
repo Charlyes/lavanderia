@@ -28,41 +28,7 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-//     public function curlPost()
-//     {
-//   $data1 = [
-//       'sub_domain' => 'value_1',
-//   ];
 
-//   $curl = curl_init();
-
-//   curl_setopt_array($curl, array(
-//       CURLOPT_URL => "https://www.asaas.com/api/v3/customers",
-//       CURLOPT_RETURNTRANSFER => true,
-//       CURLOPT_ENCODING => "",
-//       CURLOPT_MAXREDIRS => 10,
-//       CURLOPT_TIMEOUT => 30000,
-//       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//       CURLOPT_CUSTOMREQUEST => "POST",
-//       CURLOPT_POSTFIELDS => json_encode($data1),
-//       CURLOPT_HTTPHEADER => array(
-//           // Set here required headers
-//           "x-api-key: faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58",
-//       ),
-//   ));
-
-//   $response = curl_exec($curl);
-//   $err = curl_error($curl);
-
-//   curl_close($curl);
-//   return view('pages.user.report');
-
-//   if ($err) {
-//       echo "cURL Error #:" . $err;
-//   } else {
-//       print_r(json_decode($response));
-//   }
-// }
 
     public function index()
     {
@@ -70,9 +36,9 @@ class ReportController extends Controller
 
         if ($user->isAdmin()) {
             return view('pages.admin.home');
-        }
-
-        return view('pages.user.report');
+        $nova = 'yes';
+        $data = $this->transfers($transferencias);
+        return view::make('pages.user.report', compact( 'nova'));}
     }
 
     /**
@@ -85,48 +51,15 @@ class ReportController extends Controller
         //
     }
 
-    public function testeLogin(){
-//    try{4
-    //     $token = "faf6182de3d6b455577053e405a3a97241f53e756aed99195d27987bd51ebc58";
-    //     $client = new GuzzleHttp\Client(['base_uri' => 'https://www.asaas.com/api/'], ['verify' => false, 'debug' => true]);
-    //     $headers = [
-    //         'Authorization' => 'Bearer '.$token,        
-    //         'accept'        => 'application/json',
-    //         'Content-Type' => 'application/json',
-    //     ];
-        
-    //     $response = $client->request('GET', 'v3/payments?',['debug' => true],  [
-    //         'debug' => fopen('php://stderr', 'w'),
-    //     ],
-    //         [
-    //         'headers' => $headers,
-    //     ]);
-    // } catch ( \GuzzleHttp\Exception\ClientException $exception ) {
-    //     echo $exception->getResponse();
-    // }
-        // dd($response);
+    public function transfers(){
 
-        // $response = $client->request('GET', '/api/v3/customers?', [
-        //     'headers'=> [
-        //         'Authorization' => 'key='.$token,
-        //         'Content-Type' => 'application/json'
-        // ]]);
-        // dd($response->getHeader('content-type')[0]);
-        // dd($res->getStatusCode());
-        // $promise = $client->sendAsync($response);
-        // $response = $client->send($response, ['timeout' => 60]);
-        // $code = $response->getReasonPhrase();
-        // dd($response); 
-        // $response = $client->get();
-        // $response = $client->request('GET', '/api/v3/customers?api_token='.$token);
+        $token = env('TOKEN');
         $response = Http::withHeaders([
-            'accept' => 'application/json'
-        ])->withToken('1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62')->get('https://www.asaas.com/api/v3/customers?')->status();
-        
-        // $response->addHeader('Authorization', "1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62");
+            'accept' => 'application/json',
+            'access_token' => $token
+            
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
         dd($response);
-        
- 
         }
 
     /**

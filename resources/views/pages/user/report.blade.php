@@ -103,7 +103,7 @@
                 <i class="card-dash-glyph bi bi-arrow-left-right"></i>
                 <span class="card-title">N° de transações</span><br>
                 <div class="clear-both30"></div>
-                <span class="card-balance">14</span>
+                <span class="card-balance">{{$nova}}</span>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
