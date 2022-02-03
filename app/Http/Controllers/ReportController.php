@@ -124,7 +124,7 @@ class ReportController extends Controller
         ])->withToken('1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62')->get('https://www.asaas.com/api/v3/customers?')->status();
         
         // $response->addHeader('Authorization', "1ff9fbe92da3292a9d9e7ff26e4b8401067e77d55d9d035fc942a6f9350b2f62");
-        dd($response['servers']);
+        dd($response);
         
  
         }
