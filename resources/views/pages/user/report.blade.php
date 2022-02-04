@@ -103,7 +103,7 @@
                 <i class="card-dash-glyph bi bi-arrow-left-right"></i>
                 <span class="card-title">N° de transações</span><br>
                 <div class="clear-both30"></div>
-                <span class="card-balance">{{$nova}}</span>
+                <span class="card-balance">{{ $response }}</span>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
@@ -111,7 +111,7 @@
                 <i class="card-dash-glyph bi bi-graph-up"></i>
                 <span class="card-title">Ticket médio</span><br>
                 <div class="clear-both30"></div>
-                <span class="card-balance">R$&nbsp;130,50</span>
+                <span class="card-balance">R$&nbsp;0</span>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">

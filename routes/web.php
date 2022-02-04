@@ -56,11 +56,12 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep', 'chec
     //  Homepage Route - Redirect based on user role is in controller.
     Route::get('/home', ['as' => 'public.home',   'uses' => 'App\Http\Controllers\UserController@index']);
 
-    Route::get('/report', function () {
-        return view('pages.user.report');
-    })->name('report');
+    Route::get('/report', 'App\Http\Controllers\ReportController@index')->name('report');
 
-    Route::get('/testeLogin', 'App\Http\Controllers\ReportController@testeLogin')->name('testeLogin');
+    Route::get('/relatorio', 'App\Http\Controllers\ReportController@index');
+
+    Route::get('/testeLogin', 'App\Http\Controllers\ReportController@transfers');
+
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
