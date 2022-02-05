@@ -253,38 +253,9 @@
             <p class="card-title text-center">Transações por status</p>
             <!--BARRAS CIRCULARES DE PORCENTAGEM DUPLA-->
             <div class="relative">
-            <canvas id="double-chart" width="150" height="150" style="display: block !important; box-sizing: border-box; height: 150px; width: 150px;"></canvas>
+            <canvas id="myPieChart" width="150" height="150" style="display: block !important; box-sizing: border-box; height: 150px; width: 150px;"></canvas>
             </div>
-            <script>
-//                CONFIGURAÇÃO DE CHART BARS
-               
-//CHART 1 
-    var data = {
-        datasets: [
-            {
-                data: [59, 41],
-                backgroundColor: [
-                    "#3498db",
-                    "#e59617"
-                ]
-
-            }]
-    };
-
-    var promisedDeliveryChart = new Chart(document.getElementById('double-chart'), {
-        type: 'doughnut',
-        data: data,
-        options: {
-            cutout: 55,
-            maintainAspectRatio: false,
-            responsive: true,
-            legend: {
-                display: false
-            }
-        }
-    });
-
-            </script>
+            
             
             <div class="double-chart-paid">
                 <span class="chart-dot-1"></span><span class="text-chart-info">Paga</span><div class="chart-value">9</div>
@@ -431,6 +402,15 @@
 
 
 @section('script')
+
+
+    <script src="{{ asset('assets/chart.js/utils.js') }}"></script>
+    <script src="{{ asset('assets/chart.js/chart-pie.js') }}"></script>
+    <script type="text/javascript">
+        var labelss = <?php echo json_encode($labels); ?>;
+        var dado = <?php echo json_encode($dado); ?>;
+    </script>
+
 <script src="{{ asset('assets/css/main/coin.js') }}"></script>
 <script src="{{ asset('assets/css/main/functions.js') }}"></script>
 <script src="{{ asset('assets/css/main/index.js') }}"></script>
