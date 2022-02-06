@@ -35,23 +35,24 @@ class ReportController extends Controller
         // $user = Auth::user();
 
         // if ($user->isAdmin()) {
-            $nova = 'yes';
-            $token = env('TOKEN');
-            $teste = Http::withHeaders([
-                'accept' => 'application/json',
-                'access_token' => $token
-            ])->get('https://www.asaas.com/api/v3/transfers?');
+            // $nova = 'yes';
+            // $token = env('TOKEN');
+            // $teste = Http::withHeaders([
+            //     'accept' => 'application/json',
+            //     'access_token' => $token
+            // ])->get('https://www.asaas.com/api/v3/transfers?');
             // foreach($response as $item){
             //     $var = $item->totalCount;
             //   }
-            $ler=json_decode($teste);
-                $response= $ler->totalCount;
+            // $ler=json_decode($teste);
+            //     $response= $ler->totalCount;
+                $response = 0;
 
-            // $status = $this->transfers_status();
+            $total_transacionado = $this->volume_transacionado();
             $labels = $this->labels();
             $dado = $this->data();
     
-            return view('pages.user.report', compact('response', 'labels', 'dado'));
+            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado'));
         //    }else{
         //     return view('pages.admin.home');
         // }
@@ -67,15 +68,50 @@ class ReportController extends Controller
         //
     }
 
+    public function volume_transacionado(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $ary =[];
+                    foreach ($datArray as $key) {
+                        
+                        // $v= json_decode($key->status);
+                        if($key->status == 'DONE'){
+                            array_push($ary, $key->value);
+                            $s = array_sum($ary);
+                            
+                        }
+                        
+                    }
+                    return $s;
+    }
+
+    public function transfers(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $ary =[];
+                    foreach ($datArray as $key) {
+                        
+                        // $v= json_decode($key->status);
+                        
+                            array_push($ary, $key->type);
+                            
+                    }                        
+                    $valor = array_count_values($ary);
+                    $m = array_search(max($valor), $valor);
+                    dd($valor);
+    }
+
     public function transfers_status(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
-                    $token = env('TOKEN');
-                    $teste = Http::withHeaders([
-                        'accept' => 'application/json',
-                        'access_token' => $token
+                    // $token = env('TOKEN');
+                    // $teste = Http::withHeaders([
+                    //     'accept' => 'application/json',
+                    //     'access_token' => $token
                         
-                    ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
                     $datArray = $json_file->data;
                     $ary = [];
                     foreach ($datArray as $key) {

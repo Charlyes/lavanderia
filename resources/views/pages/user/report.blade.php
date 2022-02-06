@@ -21,18 +21,23 @@
 <link  href="{{ asset('assets/css/main/filters.css') }}" rel="stylesheet">	<!-- begin breadcrumb -->
 <link  href="{{ asset('assets/css/main/main-view.css') }}" rel="stylesheet">
 
-<script src="{{ asset('assets/css/main/coin.js') }}"></script>
-<script src="{{ asset('assets/css/main/functions.js') }}"></script>
-<script src="{{ asset('assets/css/main/index.js') }}"></script>
-<script src="{{ asset('assets/css/main/validation.js') }}"></script>
+<script src="{{ asset('assets/js/main/coin.js') }}"></script>
+<script src="{{ asset('assets/js/main/functions.js') }}"></script>
+<script src="{{ asset('assets/js/main/index.js') }}"></script>
+<script src="{{ asset('assets/js/main/validation.js') }}"></script>
 
 <script src="{{ asset('assets/chart.js/Chart.js') }}"></script>
 <script src="{{ asset('assets/chart.js/Chart.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/chart.js/Chart.bundle.js') }}"></script>
 <script src="{{ asset('assets/chart.js/Chart.min.js') }}"></script>
+
+<script src="{{ asset('assets/chart.js/utils.js') }}"></script>
+<!-- <script src="{{ asset('assets/chart.js/chart-pie.js') }}"></script> -->
+<!-- <script src="{{ asset('assets/chart.js/chart-area.js') }}"></script> -->
 <!-- <script src="{{ asset('assets/css/main/functions.js') }}"></script>
 <script src="{{ asset('assets/css/main/index.js') }}"></script>
 <script src="{{ asset('assets/css/main/validation.js') }}"></script> -->
+
 	
 <ol class="breadcrumb float-xl-right">
 		<li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
@@ -119,7 +124,7 @@
                 <i class="card-dash-glyph bi bi-sort-up-alt"></i>
                 <span class="card-title">Volume transacionado</span><br>
                 <div class="clear-both30"></div>
-                <span class="card-balance">R$&nbsp;2.314,00</span>
+                <span class="card-balance">R$&nbsp;{{ $total_transacionado }}</span>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
@@ -256,12 +261,55 @@
             <canvas id="myPieChart" width="150" height="150" style="display: block !important; box-sizing: border-box; height: 150px; width: 150px;"></canvas>
             </div>
             
-            
+            <script type="text/javascript">
+        var labelss = <?php echo json_encode($labels); ?>;
+        var dado = <?php echo json_encode($dado); ?>;
+        console.log(labelss);
+        console.log(dado);
+        var ctx = document.getElementById("myPieChart");
+var myPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: labelss,
+        datasets: [{
+            data: dado,
+            backgroundColor: ['#1cc88a', '#e74a3b', '#f6c23e'],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+        }],
+    },
+    options: {
+        maintainAspectRatio: false,
+        tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+        },
+        legend: {
+            display: true
+        },
+        cutoutPercentage: 50,
+    },
+});
+    </script>
             <div class="double-chart-paid">
                 <span class="chart-dot-1"></span><span class="text-chart-info">Paga</span><div class="chart-value">9</div>
             </div>
             <div class="double-chart-refused">
                 <span class="chart-dot-2"></span><span class="text-chart-info">Recusada</span><div class="chart-value">3</div>
+            </div>
+            <div class="double-chart-paid">
+                <span class="chart-dot-1"></span><span class="text-chart-info">pendente</span><div class="chart-value">9</div>
+            </div>
+            <div class="double-chart-refused">
+                <span class="chart-dot-2"></span><span class="text-chart-info">cancelada</span><div class="chart-value">3</div>
+            </div>
+            <div class="double-chart-refused">
+                <span class="chart-dot-2"></span><span class="text-chart-info">falhou</span><div class="chart-value">3</div>
             </div>
         </div>
         <div class="clear-both"></div>
@@ -404,17 +452,11 @@
 @section('script')
 
 
-    <script src="{{ asset('assets/chart.js/utils.js') }}"></script>
-    <script src="{{ asset('assets/chart.js/chart-pie.js') }}"></script>
-    <script type="text/javascript">
-        var labelss = <?php echo json_encode($labels); ?>;
-        var dado = <?php echo json_encode($dado); ?>;
-    </script>
 
-<script src="{{ asset('assets/css/main/coin.js') }}"></script>
-<script src="{{ asset('assets/css/main/functions.js') }}"></script>
-<script src="{{ asset('assets/css/main/index.js') }}"></script>
-<script src="{{ asset('assets/css/main/validation.js') }}"></script>  
+<script src="{{ asset('assets/js/main/coin.js') }}"></script>
+<script src="{{ asset('assets/js/main/functions.js') }}"></script>
+<script src="{{ asset('assets/js/main/index.js') }}"></script>
+<script src="{{ asset('assets/js/main/validation.js') }}"></script>  
 
 @endsection
 
