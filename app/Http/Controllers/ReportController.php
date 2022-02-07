@@ -85,8 +85,7 @@ class ReportController extends Controller
                     }
                     return $s;
     }
-
-    public function bancos_mais_usados(){
+    public function total(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
@@ -96,16 +95,40 @@ class ReportController extends Controller
                             array_push($ary, $key->type);
                              }                        
                     $valor = array_count_values($ary);
-                    $max = max($valor);
                     foreach($valor as $item){
-                        if($item == $max){
-                            $a = array_search($item, $valor);
-                            array_push($r, $a);
-                        }
+                            array_push($r, $item);
+                        
                     }
-
-                    return $r;
+                    return array_sum($r);
     }
+
+    public function transfers(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $ary =[];
+        $r = [];
+        $numeros = [];
+        $percent = [];
+                    foreach ($datArray as $key) {
+                            array_push($ary, $key->type);
+                             }                        
+                    $valor = array_count_values($ary);
+                    
+                    $max = max($valor);
+                    
+                            array_search(max($valor), $valor);
+                            dd($max);
+                    $total = $this->total();
+                    $soma =array_sum($numeros);
+                    
+                        $percentagem = ($soma/$total)*100;
+                        array_push($percent, $percentagem);
+                    
+                    
+                    // return $r;
+    }
+
     public function bancos_menos_usados(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
