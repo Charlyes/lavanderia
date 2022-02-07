@@ -296,20 +296,17 @@ var myPieChart = new Chart(ctx, {
     },
 });
     </script>
-            <div class="double-chart-paid">
-                <span class="chart-dot-1"></span><span class="text-chart-info">Paga</span><div class="chart-value">9</div>
+        @foreach ($labels as $label)
+            <div class="double-chart">
+            
+                <span class="chart-dot-1"></span><span class="text-chart-info">{{$label}}</span>
+            
+            @endforeach
+            @foreach ($dado as $dad)
+            <div class="chart-value">{{$dad}}</div>
             </div>
-            <div class="double-chart-refused">
-                <span class="chart-dot-2"></span><span class="text-chart-info">Recusada</span><div class="chart-value">3</div>
-            </div>
-            <div class="double-chart-paid">
-                <span class="chart-dot-1"></span><span class="text-chart-info">pendente</span><div class="chart-value">9</div>
-            </div>
-            <div class="double-chart-refused">
-                <span class="chart-dot-2"></span><span class="text-chart-info">cancelada</span><div class="chart-value">3</div>
-            </div>
-            <div class="double-chart-refused">
-            </div>
+            @endforeach
+            
         </div>
         <div class="clear-both"></div>
     </div>
