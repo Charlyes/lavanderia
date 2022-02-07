@@ -86,22 +86,93 @@ class ReportController extends Controller
                     return $s;
     }
 
-    public function transfers(){
+    public function bancos_mais_usados(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
         $ary =[];
+        $r = [];
+                    foreach ($datArray as $key) {
+                            array_push($ary, $key->type);
+                             }                        
+                    $valor = array_count_values($ary);
+                    $max = max($valor);
+                    foreach($valor as $item){
+                        if($item == $max){
+                            $a = array_search($item, $valor);
+                            array_push($r, $a);
+                        }
+                    }
+
+                    return $r;
+    }
+    public function bancos_menos_usados(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $ary =[];
+        $r = [];
+                    foreach ($datArray as $key) {
+                            array_push($ary, $key->type);
+                             }                        
+                    $valor = array_count_values($ary);
+                    $max = min($valor);
+                    foreach($valor as $item){
+                        if($item == $max){
+                            $a = array_search($item, $valor);
+                            array_push($r, $a);
+                        }
+                    }
+
+                    return $r;
+    }
+
+    private function getMonthData($id){
+        $Arraycount = [];
+        $ArrayArr = [];
+
+        foreach ($id as $key => $value) {
+            $Arraycount[(int) $key] = count($value);
+        }
+
+        for ($i = 1; $i <= 12; $i++) {
+            if (!empty($Arraycount[$i])) {
+                $ArrayArr[$i] = $Arraycount[$i];
+            } else {
+                $ArrayArr[$i] = 0;
+            }
+        }
+
+        $data = array_values($ArrayArr);
+
+        return $data;
+    }
+
+    public function transfers($id){
+        // $memberByMonth = Member::select('created_at')
+        //                 ->whereYear('created_at', $id)
+        //                 ->select('created_at')
+        //                 ->get()
+        //                 ->groupBy(function ($date) {
+        //                     return Carbon::parse($date->created_at)->format('m');
+        //                 });
+                        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+                    $datArray = $json_file->data;
+                    $ary = [];
                     foreach ($datArray as $key) {
                         
                         // $v= json_decode($key->status);
+                         array_push($ary, $key->dateCreated);
                         
-                            array_push($ary, $key->type);
-                            
-                    }                        
-                    $valor = array_count_values($ary);
-                    $m = array_search(max($valor), $valor);
-                    dd($valor);
+                    }
+
+        $user = $this->getMonthData($ary);
+
+        dd($user);
+
     }
+
 
     public function transfers_status(){
         $string = file_get_contents("assets/json/local.json");   
