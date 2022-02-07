@@ -309,7 +309,6 @@ var myPieChart = new Chart(ctx, {
                 <span class="chart-dot-2"></span><span class="text-chart-info">cancelada</span><div class="chart-value">3</div>
             </div>
             <div class="double-chart-refused">
-                <span class="chart-dot-2"></span><span class="text-chart-info">falhou</span><div class="chart-value">3</div>
             </div>
         </div>
         <div class="clear-both"></div>

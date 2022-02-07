@@ -148,7 +148,7 @@ class ReportController extends Controller
         return $data;
     }
 
-    public function transfers($id){
+    public function transferrs($id){
         // $memberByMonth = Member::select('created_at')
         //                 ->whereYear('created_at', $id)
         //                 ->select('created_at')
