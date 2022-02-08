@@ -47,12 +47,13 @@ class ReportController extends Controller
             // $ler=json_decode($teste);
             //     $response= $ler->totalCount;
                 $response = 0;
-
+                $bancos_mais_usados = $this->bancos_mais_usados();
+                $bancos_menos_usados = $this->bancos_menos_usados();
             $total_transacionado = $this->volume_transacionado();
             $labels = $this->labels();
             $dado = $this->data();
     
-            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado'));
+            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados'));
         //    }else{
         //     return view('pages.admin.home');
         // }
@@ -86,7 +87,7 @@ class ReportController extends Controller
                     return $s;
     }
 
-    public function bancos_mais_usados(){
+    public function transfers(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
@@ -106,24 +107,56 @@ class ReportController extends Controller
 
                     return $r;
     }
-    public function bancos_menos_usados(){
+
+    public function bancos_mais_usados(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
+        $total_transacionado = $this->volume_transacionado();
         $ary =[];
         $r = [];
                     foreach ($datArray as $key) {
                             array_push($ary, $key->type);
                              }                        
                     $valor = array_count_values($ary);
-                    $max = min($valor);
+                    
+                    $min = max($valor);
                     foreach($valor as $item){
-                        if($item == $max){
-                            $a = array_search($item, $valor);
-                            array_push($r, $a);
-                        }
+                        
+                            $a = array_search($min, $valor);
+                            
+                            $sum = array_sum($valor);
+                        
                     }
+                    $percent = (max($valor)/$sum)*100;
+                    array_push($r, $a);
+                    array_push($r, $percent);
+                    return $r;
+    }
 
+    public function bancos_menos_usados(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $total_transacionado = $this->volume_transacionado();
+        $ary =[];
+        $r = [];
+                    foreach ($datArray as $key) {
+                            array_push($ary, $key->type);
+                             }                        
+                    $valor = array_count_values($ary);
+                    
+                    $min = min($valor);
+                    foreach($valor as $item){
+                        
+                            $a = array_search($min, $valor);
+                            
+                            $sum = array_sum($valor);
+                        
+                    }
+                    $percent = (min($valor)/$sum)*100;
+                    array_push($r, $a);
+                    array_push($r, $percent);
                     return $r;
     }
 
