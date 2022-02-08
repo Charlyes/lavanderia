@@ -17,7 +17,7 @@
             "transferFee": 0,
             "scheduleDate": "2019-05-02",
             "authorized": true,
-            "failReason": null,
+            "failReason": "mal",
             "bankAccount": {
                 "bank": {
                     "code": "001",

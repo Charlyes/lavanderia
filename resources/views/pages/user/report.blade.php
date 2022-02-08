@@ -227,26 +227,30 @@
                 <span class="card-title">Bandeira mais utilizadas</span><br>
                 <div class="clear-both10"></div>
                 <div class="card-icon">
-                    <img src="assets/img/mastercard-logo.png">
-                    <span class="text-chart-cards">Mastercard</span>
-                    <span class="cards-percent">80%</span>
+                    <!-- <img src="assets/img/mastercard-logo.png"> -->
+
+                    <span class="text-chart-cards">{{$bancos_mais_usados[0]}}</span>&nbsp&nbsp 
+                    <span class="cards-percent">{{$bancos_mais_usados[1]}}%</span>
+                
                 </div>
+                
                 <div class="card-icon">
-                    <img src="assets/img/visa.png">
-                    <span class="text-chart-cards">Visa</span>
-                    <span class="cards-percent">20%</span>
-                </div>
+                    <!-- <img src="assets/img/visa.png"> -->
+                    <span class="text-chart-cards">{{$bancos_menos_usados[0]}}</span>&nbsp&nbsp 
+                    <span class="cards-percent">{{$bancos_menos_usados[1]}}%</span>
+                    </div>
+                
             </div>
         </div>
         <div class="clear-both20 mobile-show desktop-hide"></div>
         <div class="col-sm-12 col-md-4">
             <div class="card-infos-dash2">
-                <span class="card-title">Motivos de recusa</span><br>
+                <span class="card-title">Transaçoes de recusadas</span><br>
                 <div class="clear-both10"></div>
                 <div class="card-icon">
                     <i class="bi bi-building"></i>
-                    <span class="text-chart-cards">Emissor</span>
-                    <span class="cards-percent">100%</span>
+                    <span class="text-chart-cards">Volume</span>
+                    <span class="cards-percent">{{$numero_de_recusas}}%</span>
                 </div>
             </div>
         </div>

@@ -47,12 +47,14 @@ class ReportController extends Controller
             // $ler=json_decode($teste);
             //     $response= $ler->totalCount;
                 $response = 0;
-
+                $numero_de_recusas = $this->numero_de_recusas();
+                $bancos_mais_usados = $this->bancos_mais_usados();
+                $bancos_menos_usados = $this->bancos_menos_usados();
             $total_transacionado = $this->volume_transacionado();
             $labels = $this->labels();
             $dado = $this->data();
     
-            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado'));
+            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas'));
         //    }else{
         //     return view('pages.admin.home');
         // }
@@ -85,24 +87,31 @@ class ReportController extends Controller
                     }
                     return $s;
     }
-    public function total(){
+
+    public function numero_de_recusas(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
         $ary =[];
         $r = [];
+        $total = 0;
                     foreach ($datArray as $key) {
-                            array_push($ary, $key->type);
+                        $total++;
+                        if($key->failReason != null){
+                            array_push($ary, $key->failReason);
+                        }
                              }                        
                     $valor = array_count_values($ary);
-                    foreach($valor as $item){
-                            array_push($r, $item);
-                        
-                    }
-                    return array_sum($r);
+                    $quantidade = array_sum($valor);
+                    // foreach($valor as $item){
+                    //         array_push($r, $item);
+                    $value = ($quantidade/$total)*100;
+                        return round($value, 1);
+                    // }
+                    // return array_sum($r);
     }
 
-    public function transfers(){
+    public function transferis(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
@@ -129,24 +138,57 @@ class ReportController extends Controller
                     // return $r;
     }
 
-    public function bancos_menos_usados(){
+    public function bancos_mais_usados(){
         $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
+        $total_transacionado = $this->volume_transacionado();
         $ary =[];
         $r = [];
                     foreach ($datArray as $key) {
                             array_push($ary, $key->type);
                              }                        
                     $valor = array_count_values($ary);
-                    $max = min($valor);
+                    
+                    $min = max($valor);
                     foreach($valor as $item){
-                        if($item == $max){
-                            $a = array_search($item, $valor);
-                            array_push($r, $a);
-                        }
+                        
+                            $a = array_search($min, $valor);
+                            
+                            $sum = array_sum($valor);
+                        
                     }
+                    $percent = (max($valor)/$sum)*100;
+                    array_push($r, $a);
+                    $percent = round($percent, 1);
+                    array_push($r, $percent);
+                    return $r;
+    }
 
+    public function bancos_menos_usados(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $total_transacionado = $this->volume_transacionado();
+        $ary =[];
+        $r = [];
+                    foreach ($datArray as $key) {
+                            array_push($ary, $key->type);
+                             }                        
+                    $valor = array_count_values($ary);
+                    
+                    $min = min($valor);
+                    foreach($valor as $item){
+                        
+                            $a = array_search($min, $valor);
+                            
+                            $sum = array_sum($valor);
+                        
+                    }
+                    $percent = (min($valor)/$sum)*100;
+                    array_push($r, $a);
+                    $percent = round($percent, 1);
+                    array_push($r, $percent);
                     return $r;
     }
 
@@ -238,6 +280,28 @@ class ReportController extends Controller
             $conta= array_count_values($status);                
                 return array_values((array) $conta);
             
+        }
+
+        public function transfers(){
+            $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->data;
+        $semAtraso = 0;
+        $contaAtraso = 0;
+        $total = 0;
+        foreach($datArray as $val){
+            // dd($val->effectiveDate);
+            if((strtotime($val->effectiveDate)- strtotime($val->scheduleDate))/86400 == 0){
+                $semAtraso++;
+            }else{
+                $contaAtraso++;
+            }
+        }
+        $pega_atraso = ($semAtraso/$total)*100;
+        $atraso =round($pega_atraso);
+        $pega_atrasado= ($contaAtraso/$total)*100;
+        $atrasado =round($pega_atrasado);
+        dd($atrasado);
         }
 
 //         public function transfers(){
