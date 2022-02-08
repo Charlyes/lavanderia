@@ -47,6 +47,7 @@ class ReportController extends Controller
             // $ler=json_decode($teste);
             //     $response= $ler->totalCount;
                 $response = 0;
+                $transacao_efectivacao = $this->transacao_efectivacao();
                 $numero_de_recusas = $this->numero_de_recusas();
                 $bancos_mais_usados = $this->bancos_mais_usados();
                 $bancos_menos_usados = $this->bancos_menos_usados();
@@ -54,7 +55,7 @@ class ReportController extends Controller
             $labels = $this->labels();
             $dado = $this->data();
     
-            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas'));
+            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas', 'transacao_efectivacao'));
         //    }else{
         //     return view('pages.admin.home');
         // }
@@ -282,7 +283,7 @@ class ReportController extends Controller
             
         }
 
-        public function transfers(){
+        public function transacao_efectivacao(){
             $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
         $datArray = $json_file->data;
@@ -290,6 +291,7 @@ class ReportController extends Controller
         $contaAtraso = 0;
         $total = 0;
         foreach($datArray as $val){
+            $total++;
             // dd($val->effectiveDate);
             if((strtotime($val->effectiveDate)- strtotime($val->scheduleDate))/86400 == 0){
                 $semAtraso++;
@@ -301,7 +303,7 @@ class ReportController extends Controller
         $atraso =round($pega_atraso);
         $pega_atrasado= ($contaAtraso/$total)*100;
         $atrasado =round($pega_atrasado);
-        dd($atrasado);
+        return ([$atraso, $atrasado]);
         }
 
 //         public function transfers(){

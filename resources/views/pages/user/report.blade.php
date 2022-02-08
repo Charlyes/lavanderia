@@ -129,7 +129,7 @@
         </div>
         <div class="col-sm-12 col-md-4">
         <div class="card-infos-dash2">
-                <span class="card-title">Índices de conversão</span><br>
+                <span class="card-title">Intervalo efectivacao</span><br>
                 <style>
     #circle1,
     #circle2{
@@ -171,12 +171,12 @@
 </style>
 <div class="clear-both10"></div>
 <div id="circle1"><canvas width="70" height="70"></canvas>
-    <span id="progress-value-1" class="progress-text">40%</span>
+    <span id="progress-value-1" class="progress-text">{{$transacao_efectivacao[0]}}%</span>
     <span class="chart-text">Real</span>
 </div>
 
 <div id="circle2"><canvas width="70" height="70"></canvas>
-    <cavans id="progress-value-2" class="progress-text">60%</canvas>
+    <cavans id="progress-value-2" class="progress-text">{{$transacao_efectivacao[1]}}%</canvas>
     <span class="chart-text-2">S/retentivas</span>
 </div>
 
