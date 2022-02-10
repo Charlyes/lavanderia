@@ -114,9 +114,9 @@
         <div class="col-sm-12 col-md-4">
             <div class="card-infos-dash">
                 <i class="card-dash-glyph bi bi-graph-up"></i>
-                <span class="card-title">Ticket médio</span><br>
+                <span class="card-title">maximo transacionado</span><br>
                 <div class="clear-both30"></div>
-                <span class="card-balance">R$&nbsp;0</span>
+                <span class="card-balance">R$&nbsp;{{$valor_maximo_transacionado}}</span>
             </div>
         </div>
         <div class="col-sm-12 col-md-4">
@@ -320,19 +320,20 @@ var myPieChart = new Chart(ctx, {
 <div class="col-md-12 pad-0">
     <div class="col-md-6">
         <div class="bkg-graphics-cards">
-            <p class="text-center card-title">Quantidade de parcelas no cartão de crédito</p>
+            <p class="text-center card-title">Quantidade de transacoes autorizadas</p>
             <canvas id="graphic-chart-1"></canvas>
-            <p class="text-center blue-font">Parcelas</p>
+            <p class="text-center blue-font">Quantidade</p>
             <script>
 //                CONFIGURAÇÃO DE CHART BARS
+                var quantidade_autorizada = <?php echo json_encode($quantidade_autorizada); ?>;
                 var ctx = document.getElementById('graphic-chart-1').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['1x', '2x', '3x', '4x', '5x', '6x', '7x', '8x', '9x', '10x', '11x', '12x'],
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         datasets: [{
-                                label: 'Quantidade de parcelas no cartão de crédito',
-                                data: [12, 19, 3, 5, 2, 3, 5, 9, 4, 1, 2, 21],
+                                label: 'Quantidade de transacoes autorizadas',
+                                data: quantidade_autorizada.original,
                                 backgroundColor: [
                                     '#4fbfc9',
                                     '#4fbfc9',
@@ -385,19 +386,21 @@ var myPieChart = new Chart(ctx, {
     <div class="clear-both20 mobile-show desktop-hide"></div>
     <div class="col-md-6">
         <div class="bkg-graphics-cards">
-            <p class="text-center card-title">Volume por dia da semana</p>
+            <p class="text-center card-title">Volume de Transferencias mensais</p>
             <canvas id="graphic-chart-2"></canvas>
-            <p class="text-center blue-font">Dias da semana</p>
+            <p class="text-center blue-font">Meses por ano</p>
             <script>
 //                CONFIGURAÇÃO DE CHART LINE
+                var gettransfer = <?php echo json_encode($gettransfer); ?>; 
+                console.log(gettransfer.original);
                 var ctx = document.getElementById('graphic-chart-2').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                        labels: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'],
+                        labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                         datasets: [{
-                                label: 'Volume por dia da semana',
-                                data: [12, 19, 3, 5, 2, 3, 5, 9, 4, 1, 2, 21],
+                                label: 'Volume por Mês',
+                                data: gettransfer.original,
                                 backgroundColor: [
                                     '#4fbfc9'
 

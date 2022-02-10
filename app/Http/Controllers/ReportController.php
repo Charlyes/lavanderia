@@ -6,7 +6,8 @@ use App\Models\Report;
 // use Illuminate\Http\Request;
 use Auth;
 use GuzzleHttp;
-// use GuzzleHttp\Client;
+// use App\Http\Controllers\DateTime;
+use \DateTime;
 use Illuminate\Support\Facades\Http;
 use Psr\Http\Message\RequestInterface;
 use GuzzleHttp\Client;
@@ -47,6 +48,9 @@ class ReportController extends Controller
             // $ler=json_decode($teste);
             //     $response= $ler->totalCount;
                 $response = 0;
+                $valor_maximo_transacionado = $this->valor_maximo_transacionado();
+                $quantidade_autorizada = $this->quantidade_autorizada();
+                $gettransfer = $this->gettransfer();
                 $transacao_efectivacao = $this->transacao_efectivacao();
                 $numero_de_recusas = $this->numero_de_recusas();
                 $bancos_mais_usados = $this->bancos_mais_usados();
@@ -55,7 +59,7 @@ class ReportController extends Controller
             $labels = $this->labels();
             $dado = $this->data();
     
-            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas', 'transacao_efectivacao'));
+            return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas', 'transacao_efectivacao','gettransfer','quantidade_autorizada','valor_maximo_transacionado'));
         //    }else{
         //     return view('pages.admin.home');
         // }
@@ -214,7 +218,7 @@ class ReportController extends Controller
         return $data;
     }
 
-    public function transferrs($id){
+    public function gettransfer(){
         // $memberByMonth = Member::select('created_at')
         //                 ->whereYear('created_at', $id)
         //                 ->select('created_at')
@@ -222,20 +226,57 @@ class ReportController extends Controller
         //                 ->groupBy(function ($date) {
         //                     return Carbon::parse($date->created_at)->format('m');
         //                 });
-                        $string = file_get_contents("assets/json/local.json");   
+        $string = file_get_contents("assets/json/local.json");   
         $json_file = json_decode($string);
+                    // $token = env('TOKEN');
+                    // $teste = Http::withHeaders([
+                    //     'accept' => 'application/json',
+                    //     'access_token' => $token
+                        
+                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
                     $datArray = $json_file->data;
                     $ary = [];
                     foreach ($datArray as $key) {
-                        
-                        // $v= json_decode($key->status);
-                         array_push($ary, $key->dateCreated);
-                        
-                    }
+                       $var= new DateTime($key->dateCreated);
+                      $rt=$var->format('m');
+                    $ary[$rt][] = ['Banco' => $key->type];
+                        }
 
         $user = $this->getMonthData($ary);
 
-        dd($user);
+        return response()->json($user);
+
+    }
+
+    public function quantidade_autorizada(){
+        // $memberByMonth = Member::select('created_at')
+        //                 ->whereYear('created_at', $id)
+        //                 ->select('created_at')
+        //                 ->get()
+        //                 ->groupBy(function ($date) {
+        //                     return Carbon::parse($date->created_at)->format('m');
+        //                 });
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+                    // $token = env('TOKEN');
+                    // $teste = Http::withHeaders([
+                    //     'accept' => 'application/json',
+                    //     'access_token' => $token
+                        
+                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+                    $datArray = $json_file->data;
+                    $ary = [];
+                    foreach ($datArray as $key) {
+                        if($key->authorized == true){
+                       $var= new DateTime($key->dateCreated);
+                      $rt=$var->format('m');
+                    $ary[$rt][] = ['Banco' => $key->authorized];
+                        }
+                        }
+
+        $user = $this->getMonthData($ary);
+
+        return response()->json($user);
 
     }
 
@@ -306,40 +347,21 @@ class ReportController extends Controller
         return ([$atraso, $atrasado]);
         }
 
-//         public function transfers(){
-//             $string = file_get_contents("assets/json/local.json");   
-// $json_file = json_decode($string);
-//             $token = env('TOKEN');
-//             $teste = Http::withHeaders([
-//                 'accept' => 'application/json',
-//                 'access_token' => $token
-                
-//             ])->get('https://www.asaas.com/api/v3/transfers?')->json();
-//             $datArray = $json_file->data;
-//             $ary = [];
-//             foreach ($datArray as $key) {
-                
-//                 // $v= json_decode($key->status);
-//                  array_push($ary, $key->status);
-                
-//             }
-//             dd($ary);
-//             $delta = $ary;
-            
-
-            // if(empty($response['data'])==true){
-            //     $response='0';
-            //     return $response;
-
-            // }
-            // else{
-                // $response =$novo["data"];
-                // $response = json_decode($novo);
-                // $response = json_decode($novo);
-                // $response = $ler->data;
-                // dd($novo);
-            // }
-            // }
+        public function valor_maximo_transacionado(){
+            $string = file_get_contents("assets/json/local.json");   
+$json_file = json_decode($string);
+            $datArray = $json_file->data;
+            $ary = [];
+            foreach ($datArray as $key) {
+                array_push($ary, $key->value);
+                            //  }                        
+                    // $valor = array_count_values($ary);
+                    
+                    $max = max($ary);
+                    return $max;
+               
+            }
+            }
     /**
      * Store a newly created resource in storage.
      *
