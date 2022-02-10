@@ -32,21 +32,11 @@ class ReportController extends Controller
 
     public function index()
     {
-        // $user = Auth::user();
+        $user = Auth::user();
 
-        // if ($user->isAdmin()) {
-            // $nova = 'yes';
-            // $token = env('TOKEN');
-            // $teste = Http::withHeaders([
-            //     'accept' => 'application/json',
-            //     'access_token' => $token
-            // ])->get('https://www.asaas.com/api/v3/transfers?');
-            // foreach($response as $item){
-            //     $var = $item->totalCount;
-            //   }
-            // $ler=json_decode($teste);
-            //     $response= $ler->totalCount;
-                $response = 0;
+        if ($user->isAdmin()) {
+           
+                // $response = 0;
                 $transacao_efectivacao = $this->transacao_efectivacao();
                 $numero_de_recusas = $this->numero_de_recusas();
                 $bancos_mais_usados = $this->bancos_mais_usados();
@@ -56,9 +46,23 @@ class ReportController extends Controller
             $dado = $this->data();
     
             return view('pages.user.report', compact('response', 'labels', 'dado','total_transacionado', 'bancos_mais_usados', 'bancos_menos_usados', 'numero_de_recusas', 'transacao_efectivacao'));
-        //    }else{
-        //     return view('pages.admin.home');
-        // }
+           }else{
+            return view('pages.admin.home');
+        }
+    }
+
+    public function conta_total(){
+        $nova = 'yes';
+        $token = env('TOKEN');
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?');
+        foreach($response as $item){
+            $var = $item->totalCount;
+          }
+        $ler=json_decode($response);
+            $response= $ler->totalCount;
     }
 
     /**

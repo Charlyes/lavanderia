@@ -290,7 +290,7 @@ var myPieChart = new Chart(ctx, {
             borderWidth: 1,
             xPadding: 15,
             yPadding: 15,
-            displayColors: false,
+            displayColors: true,
             caretPadding: 10,
         },
         legend: {
