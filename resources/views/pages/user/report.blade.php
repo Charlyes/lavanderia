@@ -114,7 +114,7 @@
         <div class="col-sm-12 col-md-4">
             <div class="card-infos-dash">
                 <i class="card-dash-glyph bi bi-graph-up"></i>
-                <span class="card-title">maximo transacionado</span><br>
+                <span class="card-title">Maximo transacionado</span><br>
                 <div class="clear-both30"></div>
                 <span class="card-balance">R$&nbsp;{{$valor_maximo_transacionado}}</span>
             </div>
@@ -259,7 +259,7 @@
         <div class="clear-both20 mobile-show desktop-hide"></div>
         <div class="col-sm-12 col-md-4">
             <div class="card-infos-dash2">
-                <span class="card-title">Transaçoes de recusadas</span><br>
+                <span class="card-title">Transaçoes recusadas</span><br>
                 <div class="clear-both10"></div>
                 <div class="card-icon">
                     <i class="bi bi-building"></i>

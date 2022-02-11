@@ -399,7 +399,7 @@ class ReportController extends Controller
         $r = [];
         $total = 0;
         if($datArray == []){
-            return $var = [];
+            return $var = 0;
         }else{
             foreach ($datArray as $key) {
                 array_push($ary, $key->value);
