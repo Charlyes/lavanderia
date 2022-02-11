@@ -37,16 +37,7 @@ class ReportController extends Controller
 
         // if ($user->isAdmin()) {
             // $nova = 'yes';
-            // $token = env('TOKEN');
-            // $teste = Http::withHeaders([
-            //     'accept' => 'application/json',
-            //     'access_token' => $token
-            // ])->get('https://www.asaas.com/api/v3/transfers?');
-            // foreach($response as $item){
-            //     $var = $item->totalCount;
-            //   }
-            // $ler=json_decode($teste);
-            //     $response= $ler->totalCount;
+            
                 $response = 0;
                 $valor_maximo_transacionado = $this->valor_maximo_transacionado();
                 $quantidade_autorizada = $this->quantidade_autorizada();
@@ -55,7 +46,8 @@ class ReportController extends Controller
                 $numero_de_recusas = $this->numero_de_recusas();
                 $bancos_mais_usados = $this->bancos_mais_usados();
                 $bancos_menos_usados = $this->bancos_menos_usados();
-            $total_transacionado = $this->volume_transacionado();
+                $total_transacionado = $this->volume_transacionado();
+                $response = $this->numero_de_transacoes();
             $labels = $this->labels();
             $dado = $this->data();
     
@@ -63,6 +55,17 @@ class ReportController extends Controller
         //    }else{
         //     return view('pages.admin.home');
         // }
+    }
+
+    public function numero_de_transacoes(){
+        $token = env('TOKEN');
+            $teste = Http::withHeaders([
+                'accept' => 'application/json',
+                'access_token' => $token
+            ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+            $response=  $teste['totalCount'];
+           
+               return $response;
     }
 
     /**
@@ -76,10 +79,16 @@ class ReportController extends Controller
     }
 
     public function volume_transacionado(){
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-        $datArray = $json_file->data;
+        $token = env('TOKEN');
+            $teste = Http::withHeaders([
+                'accept' => 'application/json',
+                'access_token' => $token
+            ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+            $datArray = $teste['data'];
         $ary =[];
+        if($datArray == []){
+            return $s = 0;
+        }else{
                     foreach ($datArray as $key) {
                         
                         // $v= json_decode($key->status);
@@ -91,15 +100,22 @@ class ReportController extends Controller
                         
                     }
                     return $s;
+                }      
     }
 
     public function numero_de_recusas(){
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-        $datArray = $json_file->data;
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
         $ary =[];
         $r = [];
         $total = 0;
+        if($datArray == []){
+            return $var =0;
+        }else{
                     foreach ($datArray as $key) {
                         $total++;
                         if($key->failReason != null){
@@ -114,6 +130,7 @@ class ReportController extends Controller
                         return round($value, 1);
                     // }
                     // return array_sum($r);
+        }
     }
 
     public function transferis(){
@@ -144,12 +161,23 @@ class ReportController extends Controller
     }
 
     public function bancos_mais_usados(){
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-        $datArray = $json_file->data;
+        
         $total_transacionado = $this->volume_transacionado();
+
         $ary =[];
         $r = [];
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
                     foreach ($datArray as $key) {
                             array_push($ary, $key->type);
                              }                        
@@ -168,15 +196,25 @@ class ReportController extends Controller
                     $percent = round($percent, 1);
                     array_push($r, $percent);
                     return $r;
+                }
     }
 
     public function bancos_menos_usados(){
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-        $datArray = $json_file->data;
         $total_transacionado = $this->volume_transacionado();
         $ary =[];
         $r = [];
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
                     foreach ($datArray as $key) {
                             array_push($ary, $key->type);
                              }                        
@@ -195,6 +233,7 @@ class ReportController extends Controller
                     $percent = round($percent, 1);
                     array_push($r, $percent);
                     return $r;
+                }
     }
 
     private function getMonthData($id){
@@ -219,22 +258,18 @@ class ReportController extends Controller
     }
 
     public function gettransfer(){
-        // $memberByMonth = Member::select('created_at')
-        //                 ->whereYear('created_at', $id)
-        //                 ->select('created_at')
-        //                 ->get()
-        //                 ->groupBy(function ($date) {
-        //                     return Carbon::parse($date->created_at)->format('m');
-        //                 });
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-                    // $token = env('TOKEN');
-                    // $teste = Http::withHeaders([
-                    //     'accept' => 'application/json',
-                    //     'access_token' => $token
-                        
-                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
-                    $datArray = $json_file->data;
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
                     $ary = [];
                     foreach ($datArray as $key) {
                        $var= new DateTime($key->dateCreated);
@@ -245,27 +280,25 @@ class ReportController extends Controller
         $user = $this->getMonthData($ary);
 
         return response()->json($user);
+                    }
 
     }
 
     public function quantidade_autorizada(){
-        // $memberByMonth = Member::select('created_at')
-        //                 ->whereYear('created_at', $id)
-        //                 ->select('created_at')
-        //                 ->get()
-        //                 ->groupBy(function ($date) {
-        //                     return Carbon::parse($date->created_at)->format('m');
-        //                 });
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-                    // $token = env('TOKEN');
-                    // $teste = Http::withHeaders([
-                    //     'accept' => 'application/json',
-                    //     'access_token' => $token
-                        
-                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
-                    $datArray = $json_file->data;
+        
                     $ary = [];
+                    $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
                     foreach ($datArray as $key) {
                         if($key->authorized == true){
                        $var= new DateTime($key->dateCreated);
@@ -277,20 +310,24 @@ class ReportController extends Controller
         $user = $this->getMonthData($ary);
 
         return response()->json($user);
+                    }
 
     }
 
 
     public function transfers_status(){
-        $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-                    // $token = env('TOKEN');
-                    // $teste = Http::withHeaders([
-                    //     'accept' => 'application/json',
-                    //     'access_token' => $token
-                        
-                    // ])->get('https://www.asaas.com/api/v3/transfers?')->json();
-                    $datArray = $json_file->data;
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
                     $ary = [];
                     foreach ($datArray as $key) {
                         
@@ -300,15 +337,7 @@ class ReportController extends Controller
                     }
                     
                     return $ary;
-
-    //     $token = env('TOKEN');
-    //     $response = Http::withHeaders([
-    //         'accept' => 'application/json',
-    //         'access_token' => $token
-            
-    //     ])->get('https://www.asaas.com/api/v3/customers?');
-    //     // $response=$response['totalCount'];
-    //     dd(json_decode($response));
+                }
         }
 
         public function labels(){
@@ -325,12 +354,22 @@ class ReportController extends Controller
         }
 
         public function transacao_efectivacao(){
-            $string = file_get_contents("assets/json/local.json");   
-        $json_file = json_decode($string);
-        $datArray = $json_file->data;
+           
         $semAtraso = 0;
         $contaAtraso = 0;
         $total = 0;
+        $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
         foreach($datArray as $val){
             $total++;
             // dd($val->effectiveDate);
@@ -345,13 +384,23 @@ class ReportController extends Controller
         $pega_atrasado= ($contaAtraso/$total)*100;
         $atrasado =round($pega_atrasado);
         return ([$atraso, $atrasado]);
+    }
+
         }
 
         public function valor_maximo_transacionado(){
-            $string = file_get_contents("assets/json/local.json");   
-$json_file = json_decode($string);
-            $datArray = $json_file->data;
-            $ary = [];
+            $token = env('TOKEN');
+        $teste = Http::withHeaders([
+            'accept' => 'application/json',
+            'access_token' => $token
+        ])->get('https://www.asaas.com/api/v3/transfers?')->json();
+        $datArray = $teste['data'];
+        $ary =[];
+        $r = [];
+        $total = 0;
+        if($datArray == []){
+            return $var = [];
+        }else{
             foreach ($datArray as $key) {
                 array_push($ary, $key->value);
                             //  }                        
@@ -361,6 +410,7 @@ $json_file = json_decode($string);
                     return $max;
                
             }
+        }
             }
     /**
      * Store a newly created resource in storage.

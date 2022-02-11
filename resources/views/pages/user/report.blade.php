@@ -171,15 +171,24 @@
 </style>
 <div class="clear-both10"></div>
 <div id="circle1"><canvas width="70" height="70"></canvas>
+@if (!empty($transacao_efectivacao))
     <span id="progress-value-1" class="progress-text">{{$transacao_efectivacao[0]}}%</span>
+    <span class="chart-text">Real</span>
+
+    <div id="circle2"><canvas width="70" height="70"></canvas>
+    <cavans id="progress-value-2" class="progress-text">{{$transacao_efectivacao[1]}}%</canvas>
+    <span class="chart-text-2">S/retentivas</span>
+</div>
+@else
+<span id="progress-value-1" class="progress-text">0%</span>
     <span class="chart-text">Real</span>
 </div>
 
 <div id="circle2"><canvas width="70" height="70"></canvas>
-    <cavans id="progress-value-2" class="progress-text">{{$transacao_efectivacao[1]}}%</canvas>
+    <cavans id="progress-value-2" class="progress-text">0%</canvas>
     <span class="chart-text-2">S/retentivas</span>
 </div>
-
+@endif
 <script>
     var progress = document.getElementById("progress-value-1").innerText.replace(/\D/g, "");
 
@@ -224,22 +233,27 @@
         <div class="clear-both20 mobile-show desktop-hide"></div>
         <div class="col-sm-12 col-md-4">
             <div class="card-infos-dash2">
-                <span class="card-title">Bandeira mais utilizadas</span><br>
+                <span class="card-title">Bancos mais utilizados</span><br>
                 <div class="clear-both10"></div>
                 <div class="card-icon">
-                    <!-- <img src="assets/img/mastercard-logo.png"> -->
-
+                @if(!empty($bancos_mais_usados) )
                     <span class="text-chart-cards">{{$bancos_mais_usados[0]}}</span>&nbsp&nbsp 
                     <span class="cards-percent">{{$bancos_mais_usados[1]}}%</span>
-                
+                    @else
+                    <span class="text-chart-cards"></span>&nbsp&nbsp 
+                    <span class="cards-percent"></span>
+                    @endif
                 </div>
                 
                 <div class="card-icon">
-                    <!-- <img src="assets/img/visa.png"> -->
+                @if(!empty($bancos_menos_usados) )
                     <span class="text-chart-cards">{{$bancos_menos_usados[0]}}</span>&nbsp&nbsp 
                     <span class="cards-percent">{{$bancos_menos_usados[1]}}%</span>
+                    @else
+                    <span class="text-chart-cards"></span>&nbsp&nbsp 
+                    <span class="cards-percent"></span>
+                    @endif
                     </div>
-                
             </div>
         </div>
         <div class="clear-both20 mobile-show desktop-hide"></div>
@@ -300,6 +314,7 @@ var myPieChart = new Chart(ctx, {
     },
 });
     </script>
+    @if (!empty($labels && $dado)) 
         @foreach ($labels as $label)
             <div class="double-chart">
             
@@ -310,7 +325,13 @@ var myPieChart = new Chart(ctx, {
             <div class="chart-value">{{$dad}}</div>
             </div>
             @endforeach
+            @else
+            <div class="double-chart">
             
+                <span class="chart-dot-1"></span><span class="text-chart-info"></span>
+                <div class="chart-value"></div>
+            </div>
+            @endif
         </div>
         <div class="clear-both"></div>
     </div>
@@ -325,7 +346,7 @@ var myPieChart = new Chart(ctx, {
             <p class="text-center blue-font">Quantidade</p>
             <script>
 //                CONFIGURAÇÃO DE CHART BARS
-                var quantidade_autorizada = <?php echo json_encode($quantidade_autorizada); ?>;
+                var quantidade_autorizada = <?php if($quantidade_autorizada != []) {echo json_encode($quantidade_autorizada);} ?>;
                 var ctx = document.getElementById('graphic-chart-1').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -391,8 +412,8 @@ var myPieChart = new Chart(ctx, {
             <p class="text-center blue-font">Meses por ano</p>
             <script>
 //                CONFIGURAÇÃO DE CHART LINE
-                var gettransfer = <?php echo json_encode($gettransfer); ?>; 
-                console.log(gettransfer.original);
+                var gettransfer = <?php if($gettransfer != []){ echo json_encode($gettransfer);} ?>; 
+                // console.log(gettransfer.original);
                 var ctx = document.getElementById('graphic-chart-2').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'line',
