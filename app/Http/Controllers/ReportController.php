@@ -56,6 +56,7 @@ class ReportController extends Controller
                 $bancos_mais_usados = $this->bancos_mais_usados();
                 $bancos_menos_usados = $this->bancos_menos_usados();
             $total_transacionado = $this->volume_transacionado();
+            $response = $this->numero_transacoes();
             $labels = $this->labels();
             $dado = $this->data();
     
@@ -73,6 +74,15 @@ class ReportController extends Controller
     public function create()
     {
         //
+    }
+    public function numero_transacoes(){
+        $string = file_get_contents("assets/json/local.json");   
+        $json_file = json_decode($string);
+        $datArray = $json_file->totalCount;
+        $ary =[];
+
+                   
+                    return $datArray;
     }
 
     public function volume_transacionado(){
